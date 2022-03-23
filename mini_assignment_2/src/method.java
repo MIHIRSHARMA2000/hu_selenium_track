@@ -12,29 +12,32 @@ public class method {
         driver.get("https://phptravels.com/demo");
 
         String actualTitle = driver.getTitle();
-        System.out.println(actualTitle);
+
 
         String expectedTitle = "PHPTRAVELS";
         if(actualTitle.contains(expectedTitle))
             //Pass
-            System.out.println("Page title contains \"PHPTRAVELS\" ");
+            System.out.println("PASS");
         else
             //Fail
-            System.out.println("Page title doesn't contains \"PHPTRAVELS\" ");
+            System.out.println("FAIL ");
 
 
         String parentWindow = driver.getWindowHandle();
         WebElement login = driver.findElement(By.xpath("/html/body/header/div/nav/a[4]"));
         login.click();
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
         String actualTitleNext = driver.getTitle();
-        System.out.println(actualTitleNext);
+
         String expectedTitleNext= "Login";
         if(actualTitleNext.contains(expectedTitleNext))
             //Pass
-            System.out.println("Page title contains \"Login\" ");
+            System.out.println("PASS");
         else
             //Fail
-            System.out.println("Page title doesn't contains \"Login\" ");
+            System.out.println("FAIL");
 
         driver.switchTo().window(parentWindow);
         System.out.println(driver.getCurrentUrl());
