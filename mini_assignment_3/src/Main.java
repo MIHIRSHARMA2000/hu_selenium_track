@@ -11,8 +11,9 @@ public class Main {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\mihirsharma\\Downloads\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver= new ChromeDriver();
         //framehandling(driver);
-        //DragAndDrop(driver);
-        alerthandling(driver);
+        DragAndDrop(driver);
+        //alerthandling(driver);
+        //scenatio4(driver);
     }
     public static void framehandling(WebDriver driver)
     {
@@ -34,13 +35,10 @@ public class Main {
         driver.get("https://jqueryui.com/droppable/");
         driver.manage().window().maximize();
         Actions builder = new Actions(driver);
-        driver.switchTo().frame("demo-frame");
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='demo-frame']")));
 
-        WebElement from = driver.findElement(By.xpath("//[@id='draggable']"));
-        driver.switchTo().frame("demo-frame");
-        WebElement to = driver.findElement(By.xpath("//[@id='droppable']"));
-        builder.dragAndDrop(from, to).perform();
-        driver.close();
+        builder.dragAndDropBy(driver.findElement(By.xpath("//div[@id=\"draggable\"]")),153,26).perform();
+        driver.quit();
     }
     public static void alerthandling(WebDriver driver)
     {
